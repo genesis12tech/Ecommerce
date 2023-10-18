@@ -25,9 +25,21 @@ Route::middleware('admin:admin')->group(function () {
 
 Route::middleware(['auth:sanctum,admin', config('jetstream.auth_session'), 'verified'])->group(function () {
 	Route::get('/admin/dashboard', function () {
-		return view('dashboard');
+		return view('admin.index');
 	})->name('dashboard')->middleware('auth:admin');
 });
+
+// Admin Route
+
+Route::get('admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+
+Route::get('admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
+
+Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
+
+Route::get('admin/change/password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
+
+Route::post('admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 	Route::get('/dashboard', function () {
