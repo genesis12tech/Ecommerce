@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-	return view('welcome');
-});
+// Route::get('/', function () {
+// 	return view('frontend.index');
+// });
 
 Route::middleware('admin:admin')->group(function () {
 	Route::get('admin/login', [AdminController::class, 'loginForm']);
@@ -46,3 +47,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 		return view('dashboard');
 	})->name('dashboard');
 });
+
+// User Route
+
+Route::get('/', [IndexController::class, 'Index'])->name('home');
