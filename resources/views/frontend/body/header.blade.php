@@ -31,9 +31,24 @@
                     </div>
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
+
+
+                            @auth
+
+                            @else
+
                             <ul>
-                                <li><i class="fi-rs-key"></i><a href="login.html">Log In </a>  / <a href="register.html">Sign Up</a></li>
+                                <li><i class="fi-rs-key"></i><a href=" {{route('login')}} ">Log In </a>  / <a href="{{route('register')}}">Sign Up</a></li>
                             </ul>
+
+                            @endauth
+
+
+
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -43,7 +58,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="{{asset('frontend/assets/imgs/logo/logo.png')}}" alt="logo"></a>
+                        <a href=" {{url('/')}} "><img src="{{asset('frontend/assets/imgs/logo/logo.png')}}" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-1">
@@ -299,7 +314,7 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="active" href="index.html">Home </a></li>
+                                    <li><a class="active" href="{{url('/')}}">Home </a></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="shop.html">Shop</a></li>
                                     <li class="position-static"><a href="#">Our Collections <i class="fi-rs-angle-down"></i></a>
@@ -361,7 +376,11 @@
                                     </li>
                                     <li><a href="blog.html">Blog </a></li>
                                     <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
+
+                                    @auth
+
+
+                                     <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Dashboard</a></li>
                                             <li><a href="#">Products</a></li>
@@ -372,6 +391,15 @@
                                             <li><a href="#">Logout</a></li>
                                         </ul>
                                     </li>
+
+
+
+                                    @else
+
+
+                                    @endauth
+
+
                                 </ul>
                             </nav>
                         </div>
