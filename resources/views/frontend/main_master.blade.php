@@ -13,7 +13,13 @@
 <meta property="og:image" content="">
 <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/assets/imgs/theme/favicon.ico')}}">
 <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css')}}">
-<link rel="stylesheet" href="{{asset('frontend/assets/css/custom.css')}}"></head>
+<link rel="stylesheet" href="{{asset('frontend/assets/css/custom.css')}}">
+
+<!-- Toaster -->
+ <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+ <!-- Toaster   -->
+
+</head>
 
 <body>
     @include('frontend.body.header')
@@ -49,6 +55,31 @@
 <script src="{{asset('frontend/assets/js/plugins/jquery.elevatezoom.js')}}"></script>
 <!-- Template  JS -->
 <script src="{{asset('frontend/assets/js/main.js')}}"></script>
-<script src="{{asset('frontend/assets/js/shop.js')}}"></script></body>
+<script src="{{asset('frontend/assets/js/shop.js')}}"></script>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+ @if(Session::has('message'))
+ var type = "{{ Session::get('alert-type','info') }}"
+ switch(type){
+    case 'info':
+    toastr.info(" {{ Session::get('message') }} ");
+    break;
+    case 'success':
+    toastr.success(" {{ Session::get('message') }} ");
+    break;
+    case 'warning':
+    toastr.warning(" {{ Session::get('message') }} ");
+    break;
+    case 'error':
+    toastr.error(" {{ Session::get('message') }} ");
+    break;
+ }
+ @endif
+</script>
+
+</body>
 
 </html>

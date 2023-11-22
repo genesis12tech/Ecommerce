@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::get('/', function () {
-// 	return view('frontend.index');
-// });
+Route::get('/', function () {
+	return view('frontend.index');
+});
 
 Route::middleware('admin:admin')->group(function () {
 	Route::get('admin/login', [AdminController::class, 'loginForm']);
@@ -50,4 +50,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 // User Route
 
-Route::get('/', [IndexController::class, 'Index'])->name('home');
+Route::get('/dashboard', [IndexController::class, 'UserDashBoard'])->name('dashboard');
+
+Route::get('user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
+
+Route::post('/user/profile/store', [IndexController::class, 'UserProfileStore'])->name('user.profile.store');
+
+Route::post('/user/update/password', [IndexController::class, 'UserUpdatePassword'])->name('user.update.password');

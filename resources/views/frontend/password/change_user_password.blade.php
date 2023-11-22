@@ -2,8 +2,6 @@
 
 @section('main')
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
 
 
 
@@ -25,7 +23,7 @@
                             <div class="col-md-4">
 
 
-
+                                <img  class="card-img-top"  style="border-radius: 100%; border: solid 1px #F15412; " src="{{(!empty($editData->profile_photo_path))? url('upload/admin_images/'.$editData->profile_photo_path):url('upload/no_image.jpg')}}" height="30%" width="30%" > <br><br>
 
 
 
@@ -48,39 +46,28 @@
                                         <li class="nav-item">
                                             <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                         </li>
-
-
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="update-password-tab" data-bs-toggle="tab" href="#update-password" role="tab" aria-controls="update-password" aria-selected="true"><i class="fi-rs-user mr-10"></i>Update Password</a>
-                                        </li>
-
-
-
                                         <li class="nav-item">
                                             <a class="nav-link" href=" {{route('user.logout')}} "><i class="fi-rs-sign-out mr-10"></i>Logout</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+
                             <div class="col-md-8">
                                 <div class="tab-content dashboard-content">
                                     <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                         <div class="card">
                                             <div class="card-header">
-                                    <h5 class="mb-0">Hello {{Auth::user()->name}} ! </h5>
-
-                                    <br>
-                                      <img id="showImage" src="{{ (!empty($userData->profile_photo_path)) ? url('upload/user_images/'.$userData->profile_photo_path):url('upload/no_image.jpg') }}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
-
-
+                                                <h5 class="mb-0">Hello {{Auth::user()->name}} ! </h5>
                                             </div>
-
-
                                             <div class="card-body">
                                                 <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a></p>
                                             </div>
                                         </div>
                                     </div>
+
+
+
                                     <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                         <div class="card">
                                             <div class="card-header">
@@ -180,8 +167,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
                                         <div class="card">
                                             <div class="card-header">
@@ -189,60 +174,25 @@
                                             </div>
                                             <div class="card-body">
                                                 <p>Already have an account? <a href="login.html">Log in instead!</a></p>
-
-        <form method="post" action="{{ route('user.profile.store') }}" enctype="multipart/form-data" >
-            @csrf
-
-
+                                                <form method="post" name="enq">
                                                     <div class="row">
-
-
-                                                        <div class="form-group col-md-12">
-                                                            <label>        Name <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" name="name" type="text" value=" {{$userData->name}} " >
+                                                        <div class="form-group col-md-6">
+                                                            <label>First Name <span class="required">*</span></label>
+                                                            <input required="" class="form-control square" name="name" type="text">
                                                         </div>
-
-
+                                                        <div class="form-group col-md-6">
+                                                            <label>Last Name <span class="required">*</span></label>
+                                                            <input required="" class="form-control square" name="phone">
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label>Display Name <span class="required">*</span></label>
+                                                            <input required="" class="form-control square" name="dname" type="text">
+                                                        </div>
                                                         <div class="form-group col-md-12">
                                                             <label>Email Address <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" name="email" type="email"  value=" {{$userData->email }} "  >
+                                                            <input required="" class="form-control square" name="email" type="email">
                                                         </div>
-
-
                                                         <div class="form-group col-md-12">
-                                                            <label>Phone <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" name="phone" type="text"  value=" {{$userData->phone }} "  >
-                                                        </div>
-
-
-
-
-                                                        <div class="form-group col-md-12">
-                                                            <label>Address <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" name="address" type="text"  value=" {{$userData->address }} "  >
-                                                        </div>
-
-
-                                                        <div class="form-group col-md-12">
-                                                            <label>Image <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" name="profile_photo_path" type="file" id="image">
-                                                        </div>
-
-
-
-                                                         <div class="form-group col-md-12">
-                                                        <label>  <span class="required">*</span></label>
-                                                      <img id="showImage" src="{{ (!empty($userData->profile_photo_path)) ? url('upload/user_images/'.$userData->profile_photo_path):url('upload/no_image.jpg') }}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
-                                                      </div>
-
-
-
-
-
-
-
-
-                                                        <!-- <div class="form-group col-md-12">
                                                             <label>Current Password <span class="required">*</span></label>
                                                             <input required="" class="form-control square" name="password" type="password">
                                                         </div>
@@ -253,8 +203,7 @@
                                                         <div class="form-group col-md-12">
                                                             <label>Confirm Password <span class="required">*</span></label>
                                                             <input required="" class="form-control square" name="cpassword" type="password">
-                                                        </div> -->
-
+                                                        </div>
                                                         <div class="col-md-12">
                                                             <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>
                                                         </div>
@@ -263,74 +212,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-
-
-
-                                     <div class="tab-pane fade" id="update-password" role="tabpanel" aria-labelledby="update-password-tab">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Update Password</h5>
-                                            </div>
-                                            <div class="card-body">
-
-
-        <form method="post" action="{{ route('user.update.password') }}" >
-            @csrf
-
-                                                @if (session('status'))
-                                     <div class="alert alert-success" role="alert">
-                                            {{session('status')}}
-                                     </div>
-                                     @elseif(session('error'))
-                                     <div class="alert alert-danger" role="alert">
-                                        {{session('error')}}
-                                     </div>
-                                     @endif
-
-
-                                                    <div class="row">
-
-
-                                                        <div class="form-group col-md-12">
-                                                            <label>Current Password <span class="required">*</span></label>
-                                                            <input id="current_password" required="" class="form-control square" name="old_password"  type="password">
-
-                                                            @error('old_password')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-
-
-
-                                                        </div>
-
-
-                                                        <div class="form-group col-md-12">
-                                                            <label>New Password <span class="required">*</span></label>
-                                                            <input id="new_password" required="" class="form-control square" name="new_password" type="password">
-
-                                                            @error('new_password')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-
-                                                        <div class="form-group col-md-12">
-                                                            <label>Confirm Password <span class="required">*</span></label>
-                                                            <input id="password_confirmation"  required="" class="form-control square" name="password_confirmation" type="password">
-                                                        </div>
-
-                                                        <div class="col-md-12">
-                                                            <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div> <!-- end of Password -->
-
                                 </div>
                             </div>
                         </div>
@@ -344,17 +225,7 @@
 
 
 
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $('#image').change(function(e){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                $('#showImage').attr('src',e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
-    });
-</script>
+
 
 
 
