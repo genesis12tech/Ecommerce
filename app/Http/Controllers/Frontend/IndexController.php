@@ -58,22 +58,24 @@ class IndexController extends Controller {
 
 	public function UserUpdatePassword(Request $request) {
 		// Validation
-		$request->validate([
+		$validateData = $request->validate([
 			'old_password' => 'required',
 			'new_password' => 'required|confirmed',
 		]);
 
 		// Match The Old Password
-		if (!Hash::check($request->old_password, auth::user()->password)) {
-			return back()->with("error", "Old Password Doesn't Match!!");
+		if (Hash::check($request->old_password, Auth::user()->password)) {
+
+			$user = User::find(Auth::id());
+			$user->password = Hash::make($request->new_password);
+			$user->save();
+			Auth::logout();
+
+			return redirect()->route('user.logout');
+		} else {
+			return redirect()->back();
+
 		}
-
-		// Update The new password
-		User::whereId(auth()->user()->id)->update([
-			'password' => Hash::make($request->new_password),
-
-		]);
-		return back()->with("status", " Password Changed Successfully");
 
 	} // End Mehtod
 
